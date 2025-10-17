@@ -1,0 +1,1270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restricted Intelligence Briefing - Access Control</title>
+    <script type="text/javascript">(function(w,s){var e=document.createElement("script");e.type="text/javascript";e.async=true;e.[src="https://cdn-eu.pagesense.io/js/canvigroup131/2a5b6adfc7ae4331ac792b0c3f0cfe37.js](src="https://cdn-eu.pagesense.io/js/canvigroup131/2a5b6adfc7ae4331ac792b0c3f0cfe37.js)";var x=document.getElementsByTagName("script")[0];x.parentNode.insertBefore(e,x);})(window,"script");</script>
+  <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            background: #ffffff;
+            color: #000000;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .page {
+            display: none;
+            min-height: 100vh;
+        }
+        
+        .page.active {
+            display: block;
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        /* Password Page */
+        .password-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 40px 20px;
+            background: #fafafa;
+        }
+        
+        .password-box {
+            background: #ffffff;
+            padding: 50px 45px;
+            border: 1px solid #e0e0e0;
+            max-width: 480px;
+            width: 100%;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        
+        .password-box h1 {
+            font-size: 24px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+            color: #000000;
+        }
+        
+        .classification {
+            display: inline-block;
+            background: #000000;
+            color: #ffffff;
+            padding: 4px 12px;
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            margin-bottom: 30px;
+        }
+        
+        .password-box p {
+            font-size: 14px;
+            color: #666666;
+            margin-bottom: 30px;
+            line-height: 1.6;
+            font-weight: 400;
+        }
+        
+        .input-group {
+            margin-bottom: 20px;
+        }
+        
+        .input-group label {
+            display: block;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+            color: #333333;
+        }
+        
+        .input-group input {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid #d0d0d0;
+            font-size: 14px;
+            transition: all 0.2s;
+            background: #fafafa;
+            font-family: 'Courier New', monospace;
+            letter-spacing: 1px;
+        }
+        
+        .input-group input:focus {
+            outline: none;
+            border-color: #000000;
+            background: #ffffff;
+        }
+        
+        .btn {
+            width: 100%;
+            padding: 14px;
+            background: #000000;
+            color: #ffffff;
+            border: none;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .btn:hover {
+            background: #1a1a1a;
+        }
+        
+        .error-message {
+            display: none;
+            background: #000000;
+            color: #ffffff;
+            padding: 12px;
+            margin-top: 15px;
+            font-size: 12px;
+            border-left: 3px solid #ff0000;
+        }
+        
+        .error-message.show {
+            display: block;
+        }
+        
+        /* Disclaimer Page */
+        .disclaimer-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 60px 40px 120px;
+            min-height: 100vh;
+            animation: fadeInUp 0.4s ease-out;
+        }
+        
+        .disclaimer-header {
+            text-align: center;
+            margin-bottom: 50px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .disclaimer-header h1 {
+            font-size: 28px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+            color: #000000;
+        }
+        
+        .disclaimer-content {
+            background: #fafafa;
+            padding: 40px;
+            border-left: 2px solid #000000;
+            margin-bottom: 40px;
+        }
+        
+        .disclaimer-content h2 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            letter-spacing: 0.3px;
+            color: #000000;
+        }
+        
+        .disclaimer-content p {
+            font-size: 13px;
+            margin-bottom: 15px;
+            color: #333333;
+            line-height: 1.7;
+            font-weight: 400;
+        }
+        
+        .scroll-indicator {
+            text-align: center;
+            padding: 20px;
+            font-size: 12px;
+            color: #999999;
+            font-style: italic;
+        }
+        
+        /* Floating Accept Button */
+        .floating-accept {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s ease;
+        }
+        
+        .floating-accept.visible {
+            opacity: 1;
+            pointer-events: auto;
+            animation: slideInRight 0.4s ease-out;
+        }
+        
+        .accept-btn {
+            padding: 14px 32px;
+            background: #cccccc;
+            color: #666666;
+            border: 1px solid #999999;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            cursor: not-allowed;
+            transition: all 0.2s;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .accept-btn::before {
+            content: '⚠';
+            font-size: 16px;
+        }
+        
+        .accept-btn.enabled {
+            background: #000000;
+            color: #ffffff;
+            border-color: #000000;
+            cursor: pointer;
+        }
+        
+        .accept-btn.enabled::before {
+            content: '✓';
+            font-size: 14px;
+        }
+        
+        .accept-btn.enabled:hover {
+            background: #1a1a1a;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+        }
+        
+        /* Report Content */
+        .report-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 60px 40px 100px;
+            animation: fadeInUp 0.4s ease-out;
+        }
+        
+        .report-header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .report-header h1 {
+            font-size: 32px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+            color: #000000;
+        }
+        
+        .report-header h2 {
+            font-size: 22px;
+            font-weight: 300;
+            margin-top: 10px;
+            letter-spacing: 0.5px;
+            color: #333333;
+        }
+        
+        .report-meta {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1px;
+            margin-top: 30px;
+            background: #e0e0e0;
+            border: 1px solid #e0e0e0;
+        }
+        
+        .meta-item {
+            font-size: 11px;
+            letter-spacing: 0.5px;
+            padding: 15px 20px;
+            background: #fafafa;
+            transition: all 0.2s ease;
+        }
+        
+        .meta-item:hover {
+            background: #ffffff;
+        }
+        
+        .meta-item strong {
+            font-weight: 600;
+            color: #000000;
+            display: block;
+            margin-bottom: 4px;
+            text-transform: uppercase;
+        }
+        
+        .meta-item span {
+            color: #666666;
+            font-weight: 400;
+        }
+        
+        /* Navigation Menu */
+        .nav-menu {
+            position: sticky;
+            top: 0;
+            background: #ffffff;
+            z-index: 100;
+            margin: 40px 0 50px;
+            border-top: 1px solid #e0e0e0;
+            border-bottom: 1px solid #e0e0e0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+        }
+        
+        .nav-menu ul {
+            display: flex;
+            list-style: none;
+            overflow-x: auto;
+            padding: 0;
+            margin: 0;
+            scrollbar-width: thin;
+            scrollbar-color: #e0e0e0 #fafafa;
+        }
+        
+        .nav-menu ul::-webkit-scrollbar {
+            height: 6px;
+        }
+        
+        .nav-menu ul::-webkit-scrollbar-track {
+            background: #fafafa;
+        }
+        
+        .nav-menu ul::-webkit-scrollbar-thumb {
+            background: #e0e0e0;
+            border-radius: 3px;
+        }
+        
+        .nav-menu ul::-webkit-scrollbar-thumb:hover {
+            background: #d0d0d0;
+        }
+        
+        .nav-menu li {
+            flex: 1;
+            min-width: 140px;
+        }
+        
+        .nav-menu button {
+            width: 100%;
+            padding: 16px 15px;
+            background: #fafafa;
+            border: none;
+            border-right: 1px solid #e0e0e0;
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: #666666;
+            position: relative;
+        }
+        
+        .nav-menu button::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #000000;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-menu button:hover {
+            background: #f0f0f0;
+            color: #000000;
+        }
+        
+        .nav-menu button:hover::after {
+            width: 100%;
+        }
+        
+        .nav-menu button.active {
+            background: #000000;
+            color: #ffffff;
+        }
+        
+        .nav-menu button.active::after {
+            width: 100%;
+            background: #ffffff;
+        }
+        
+        .nav-menu li:last-child button {
+            border-right: none;
+        }
+        
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: #000000;
+            color: #ffffff;
+            border: none;
+            cursor: pointer;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s ease;
+            font-size: 20px;
+            z-index: 99;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+        
+        .back-to-top.visible {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        
+        .back-to-top:hover {
+            background: #1a1a1a;
+            transform: translateY(-3px);
+        }
+        
+        /* Loading State for Sections */
+        .report-section {
+            display: none;
+            animation: fadeInUp 0.3s ease-out;
+            min-height: 400px;
+        }
+        
+        .report-section.active {
+            display: block;
+        }
+        
+        .section {
+            margin-bottom: 50px;
+        }
+        
+        .section-header {
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .section-number {
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            color: #999999;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+        
+        .section-title {
+            font-size: 24px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            color: #000000;
+        }
+        
+        .section-subtitle {
+            font-size: 16px;
+            font-weight: 600;
+            margin: 30px 0 15px 0;
+            letter-spacing: 0.3px;
+            color: #1a1a1a;
+            padding-left: 12px;
+            border-left: 2px solid #000000;
+        }
+        
+        .content-text {
+            font-size: 14px;
+            line-height: 1.8;
+            color: #333333;
+            margin-bottom: 20px;
+            font-weight: 400;
+        }
+        
+        .content-text p {
+            margin-bottom: 15px;
+        }
+        
+        .content-text strong {
+            font-weight: 600;
+            color: #000000;
+        }
+        
+        .bullet-point {
+            padding-left: 20px;
+            position: relative;
+            margin-bottom: 12px;
+            font-size: 14px;
+            line-height: 1.7;
+            color: #333333;
+        }
+        
+        .bullet-point:before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            font-size: 16px;
+            color: #000000;
+            font-weight: 600;
+        }
+        
+        .info-box {
+            background: #fafafa;
+            border-left: 2px solid #000000;
+            padding: 25px;
+            margin: 25px 0;
+        }
+        
+        .info-box h3 {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            letter-spacing: 0.3px;
+            color: #000000;
+        }
+        
+        .info-box p {
+            font-size: 13px;
+            line-height: 1.7;
+            color: #333333;
+            margin-bottom: 10px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+            font-size: 13px;
+            border: 1px solid #e0e0e0;
+        }
+        
+        th {
+            background: #000000;
+            color: #ffffff;
+            padding: 14px 16px;
+            text-align: left;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            font-size: 10px;
+            border-right: 1px solid #333333;
+        }
+        
+        th:last-child {
+            border-right: none;
+        }
+        
+        td {
+            padding: 14px 16px;
+            border-bottom: 1px solid #e0e0e0;
+            border-right: 1px solid #e0e0e0;
+            vertical-align: top;
+        }
+        
+        td:last-child {
+            border-right: none;
+        }
+        
+        tr:last-child td {
+            border-bottom: none;
+        }
+        
+        tr:hover {
+            background: #fafafa;
+        }
+        
+        .footer-note {
+            margin-top: 80px;
+            padding-top: 30px;
+            border-top: 1px solid #e0e0e0;
+            text-align: center;
+            font-size: 11px;
+            color: #666666;
+        }
+        
+        .footer-note p {
+            margin-bottom: 5px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .password-box {
+                padding: 40px 30px;
+            }
+            
+            .report-container,
+            .disclaimer-container {
+                padding: 40px 20px 100px;
+            }
+            
+            .nav-menu ul {
+                flex-direction: column;
+            }
+            
+            .nav-menu li {
+                min-width: 100%;
+            }
+            
+            .nav-menu button {
+                border-right: none;
+                border-bottom: 1px solid #e0e0e0;
+                text-align: left;
+                padding: 18px 20px;
+            }
+            
+            .nav-menu li:last-child button {
+                border-bottom: none;
+            }
+            
+            .floating-accept {
+                bottom: 20px;
+                right: 20px;
+                left: 20px;
+            }
+            
+            .accept-btn {
+                padding: 14px 20px;
+                font-size: 10px;
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .report-header h1 {
+                font-size: 26px;
+            }
+            
+            .section-title {
+                font-size: 20px;
+            }
+            
+            .report-meta {
+                grid-template-columns: 1fr;
+            }
+            
+            table {
+                font-size: 12px;
+            }
+            
+            th, td {
+                padding: 10px 12px;
+            }
+            
+            .back-to-top {
+                width: 45px;
+                height: 45px;
+                bottom: 20px;
+                right: 20px;
+                font-size: 18px;
+            }
+        }
+        
+        /* Focus States for Accessibility */
+        button:focus,
+        input:focus {
+            outline: 2px solid #000000;
+            outline-offset: 2px;
+        }
+        
+        /* Print Styles */
+        @media print {
+            .nav-menu,
+            .floating-accept,
+            .back-to-top,
+            .scroll-indicator {
+                display: none !important;
+            }
+            
+            .report-section {
+                display: block !important;
+                page-break-inside: avoid;
+            }
+            
+            .section {
+                page-break-inside: avoid;
+            }
+            
+            body {
+                background: #ffffff;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Password Page -->
+    <div id="passwordPage" class="page active">
+        <div class="password-container">
+            <div class="password-box">
+                <h1>Restricted Access</h1>
+                <span class="classification">RESTRICTED // SENSITIVE INTEL</span>
+                <p>This intelligence briefing contains sensitive information. Authorization is required to proceed.</p>
+                
+                <div class="input-group">
+                    <label>Access Code</label>
+                    <input type="password" id="passwordInput" placeholder="Enter access code">
+                </div>
+                
+                <button class="btn" onclick="checkPassword()">Authenticate</button>
+                
+                <div class="error-message" id="errorMessage">
+                    Invalid access code. Please try again.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Disclaimer Page -->
+    <div id="disclaimerPage" class="page">
+        <div class="disclaimer-container">
+            <div class="disclaimer-header">
+                <h1>Legal Disclaimer</h1>
+                <span class="classification">MANDATORY REVIEW REQUIRED</span>
+            </div>
+            
+            <div class="disclaimer-content">
+                <h2>Disclaimer</h2>
+                
+                <p>The content and information on this site, produced by the International Relations and Geopolitical Intelligence Unit (IRGIU) of CANVI, is for informational purposes only, intended for use by CANVI and authorised entities. The content is derived from a global network of government and ex-government officials, military and ex-military personnel, intelligence, diplomats, corporations, companies, and other confidential sources.</p>
+                
+                <p>A portion of the information contained herein is based on human intelligence (HUMINT) gathered through CANVI's internal networks, including individuals linked to intelligence agencies, governments, and other institutions. Such information, by its nature, may not be independently verifiable. Accordingly, this material should be treated as indicative, not definitive.</p>
+                
+                <p>The content and information on this site is a summarised excerpt from our comprehensive internal data vault. It is not for general distribution and should not be seen as an official stance of CANVI.</p>
+                
+                <h2>Intellectual Property Rights</h2>
+                <p>All content, including but not limited to analyses, scenarios, data, and methodologies, is the intellectual property of CANVI. Unauthorized use, duplication, or distribution of any material from this site is strictly prohibited and may be subject to legal action.</p>
+                
+                <h2>Accuracy and Reliability</h2>
+                <p>The IRGIU of CANVI has made every effort to ensure that the information and analysis provided on this site are accurate and based on reliable sources. However, the IRGIU does not guarantee the accuracy, completeness, or timeliness of the information. Certain insights are drawn from HUMINT sources, which, while valuable, may not always be verifiable.</p>
+                
+                <p>The scenarios and analyses are based on a combination of historical data, HUMINT, current affairs, and speculative projections; they are intended for strategic contemplation and should not be interpreted as definitive forecasts.</p>
+                
+                <h2>No Investment or Policy Advice</h2>
+                <p>The content and information on this site does not constitute investment, policy, legal, or any other form of professional advice. It should not be used as the sole basis for making significant policy decisions, investments, or other important resolutions. CANVI and the IRGIU are not responsible for any actions taken based on the information provided in this site.</p>
+                
+                <h2>Limitation of Liability</h2>
+                <p>CANVI and the IRGIU shall not be liable for any direct, indirect, incidental, or consequential damages resulting from the use of, or reliance on, the information contained on this site. This includes, but is not limited to, loss of profit, business interruption, or any other financial or non-financial losses.</p>
+                
+                <h2>External Sources</h2>
+                <p>Information derived from external sources is credited appropriately within the document. However, the IRGIU is not responsible for the content or accuracy of these external sources.</p>
+                
+                <h2>Changes and Updates</h2>
+                <p>The information and scenarios presented on this site are subject to change without notice. The IRGIU reserves the right to update or modify the content based on new information, HUMINT inputs, changing circumstances, or for any other reason deemed necessary.</p>
+                
+                <h2>Confidentiality</h2>
+                <p>The content and information on this site contains sensitive and confidential information. Recipients are obligated to maintain the confidentiality of the information and to use it solely for the purposes intended by CANVI.</p>
+                
+                <h2>Jurisdiction and Applicable Law</h2>
+                <p>Any disputes or claims arising out of or in connection with this disclaimer shall be governed by and construed in accordance with the laws of the jurisdiction in which CANVI is headquartered.</p>
+                
+                <p style="margin-top: 30px; font-weight: 600; padding-top: 20px; border-top: 1px solid #e0e0e0;">By accepting these terms, you confirm that you are an authorized user with legitimate need-to-know, and you agree to maintain the confidentiality and security of this information.</p>
+            </div>
+            
+            <div class="scroll-indicator" id="scrollIndicator">
+                ↓ Scroll to bottom to proceed ↓
+            </div>
+        </div>
+        
+        <div class="floating-accept" id="floatingAccept">
+            <button class="accept-btn" id="acceptBtn" onclick="acceptTerms()">Accept & Continue</button>
+        </div>
+    </div>
+
+    <!-- Report Content -->
+    <div id="reportPage" class="page">
+        <div class="report-container">
+            <div class="report-header">
+                <span class="classification">RESTRICTED // SENSITIVE INTEL</span>
+                <h1>Intelligence Briefing</h1>
+                <h2>Aurora Barrionuevo</h2>
+                
+                <div class="report-meta">
+                    <div class="meta-item">
+                        <strong>Briefing ID</strong>
+                        <span>AB-EXP-2025-1016</span>
+                    </div>
+                    <div class="meta-item">
+                        <strong>Date</strong>
+                        <span>October 16, 2025</span>
+                    </div>
+                    <div class="meta-item">
+                        <strong>Prepared By</strong>
+                        <span>IRGIU</span>
+                    </div>
+                    <div class="meta-item">
+                        <strong>Classification</strong>
+                        <span>Restricted</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Navigation Menu -->
+            <nav class="nav-menu">
+                <ul>
+                    <li><button onclick="showSection('summary')" class="active">Scope</button></li>
+                    <li><button onclick="showSection('personal')">Personal Profile</button></li>
+                    <li><button onclick="showSection('professional')">Professional Profile</button></li>
+                    <li><button onclick="showSection('network')">Network Dynamics</button></li>
+                    <li><button onclick="showSection('risk')">Risk Assessment</button></li>
+                    <li><button onclick="showSection('insights')">Insights</button></li>
+                </ul>
+            </nav>
+
+            <!-- Executive Summary Section -->
+            <div id="summary" class="report-section active">
+                <div class="section">
+                    <div class="section-header">
+                        <div class="section-number">SCOPE</div>
+                        <h2 class="section-title">Briefing Overview</h2>
+                    </div>
+                    <div class="content-text">
+                        <p>This expanded briefing delves deeper into the collated OSINT and HUMINT from prior analyses, providing granular insights into Aurora Barrionuevo profile. It synthesizes chronological patterns, behavioral inferences, network dynamics, and risk vectors, emphasizing her role as a high-access remote PA during a pivotal period for Islamic Relief Worldwide (IRW). Expansions draw from raw data points (e.g., specific Facebook interactions, post timelines) to illuminate her evolution from casual online participant to discreet executive enabler.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Personal Profile Section -->
+            <div id="personal" class="report-section">
+                <div class="section">
+                    <div class="section-header">
+                        <div class="section-number">SECTION 01</div>
+                        <h2 class="section-title">Expanded Personal Profile</h2>
+                    </div>
+                    
+                    <h3 class="section-subtitle">A Portrait of Discreet Adaptability</h3>
+                    <div class="content-text">
+                        <p>Aurora's personal footprint is intentionally faint, a hallmark of professionals in sensitive support roles who prioritize operational security over visibility. Her Bogotá base—evident in sustained engagement with city-specific groups like "Soy Bilingüe | Empleo y Oportunidades | Bogotá"—anchors her in Colombia's dynamic urban freelance scene, where remote work has surged post-2020 amid economic volatility (e.g., COP inflation pressures). This location offers logistical advantages: Proximity to Latin American hubs for low-cost talent pools, yet geographic distance from IR Canada's Burlington HQ enables "out-of-sight" access without visa entanglements.</p>
+                    </div>
+                    
+                    <h3 class="section-subtitle">Demographic and Lifestyle Nuances</h3>
+                    <div class="content-text">
+                        <div class="bullet-point"><strong>Age Range:</strong> Estimated mid-to-late 20s (inferred from 2016's youthful, meme-driven posts evolving to 2025's polished recruitment shares)</div>
+                        <div class="bullet-point"><strong>Family Context:</strong> No overt family mentions, but 2020's nod to Santa Rosa de Cabal (a Risaralda thermal spa town ~7 hours from Bogotá) hints at occasional escapes—perhaps family-rooted or stress-relief amid freelance hustle</div>
+                        <div class="bullet-point"><strong>Language Skills:</strong> Bilingual proficiency (fluent English evident in job post phrasing like "CVs in English required") likely stems from self-study or informal exposure, common in Colombian VAs targeting North American clients; no university ties surface, suggesting practical, non-academic credentials</div>
+                    </div>
+                    
+                    <h3 class="section-subtitle">Personality Evolution Through Digital Traces</h3>
+                    <div class="content-text">
+                        <p><strong>Pre-2023 Activity (2016–2020):</strong> Reveals a relatable, resilient character suited for high-trust gatekeeping roles:</p>
+                        
+                        <div class="info-box">
+                            <h3>2016: Humor and Empathy</h3>
+                            <p>Lighthearted quips in relationship-themed groups, e.g., "Ten paciencia con ella porque la chica que siempre está soltera te amará como ninguna" on a procrastination meme—showcasing wit that builds rapport, a soft skill for PA diplomacy in tense NGO environments like IRW's advocacy disputes.</p>
+                        </div>
+                        
+                        <div class="info-box">
+                            <h3>2018–2019: Community and Aesthetics</h3>
+                            <p>Shares on pets (e.g., animal photos fostering warmth) and Bogotá's architecture (e.g., admiring colonial facades), indicating a creative, grounded sensibility. This contrasts with her later utilitarianism, suggesting compartmentalization: Personal warmth offline, professional reserve online.</p>
+                        </div>
+                        
+                        <div class="info-box">
+                            <h3>2020: Resourcefulness in Crisis</h3>
+                            <p>Amid early COVID, practical endorsements like praising a Santa Rosa bakery's red velvet cake—framed as a "must-try comfort"—highlight adaptability, mirroring how a PA might pivot during IRW's emergency responses (e.g., 2025 Syria aid logistics).</p>
+                        </div>
+                        
+                        <p><strong>Post-2023 Shift:</strong> This shifts to zero personal reveals, aligning with role demands: Handling Tufail's confidential orbit requires "vanishing" online, reducing doxxing risks in IRW's contentious landscape (e.g., UAE/Israeli smears).</p>
+                    </div>
+                    
+                    <div class="info-box">
+                        <h3>Inferences on Character</h3>
+                        <p>Empathetic yet pragmatic—ideal for navigating Tufail's "inclusivity-focused" leadership (per his ICVA profile). No red flags like ideological rants or financial boasts; her consistency implies integrity, though freelance juggling raises burnout potential.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Professional Profile Section -->
+            <div id="professional" class="report-section">
+                <div class="section">
+                    <div class="section-header">
+                        <div class="section-number">SECTION 02</div>
+                        <h2 class="section-title">Granular Professional Profile</h2>
+                    </div>
+                    
+                    <h3 class="section-subtitle">From Gig Entrant to Executive Pivot</h3>
+                    <div class="content-text">
+                        <p>Aurora's career arc reflects Colombia's VA boom (projected 25% growth by 2026 per local reports), transitioning from informal networking to specialized remote support. Her Islamic Relief role—HUMINT-confirmed as ongoing—positions her at the nexus of humanitarian strategy, with access to unfiltered executive flows during Tufail's speculated IRW ascent (building on his 2021 interim CEO experience).</p>
+                    </div>
+                    
+                    <h3 class="section-subtitle">Core Role Breakdown: PA to Tufail Hussain</h3>
+                    
+                    <div class="info-box">
+                        <h3>Onboarding Context (~2023)</h3>
+                        <p>Entry via recruitment networks; first public marker is the December 1, 2023, "Cooperación Colombia" post for a Graphic Design Specialist—phrased with insider precision ("Bilingual English/Spanish preferred; remote from Canada"), implying direct HR coordination.</p>
+                    </div>
+                    
+                    <div class="content-text">
+                        <p><strong>Daily/Strategic Duties:</strong> As remote PA, she likely manages Tufail's tri-branch oversight (Canada interim CEO since July 2025, UK Director since 2019), including:</p>
+                        
+                        <div class="bullet-point"><strong>Scheduling/Comms:</strong> Calendaring high-stakes meetings (e.g., ICVA board sessions on "resilience in crises"), drafting donor outreach—exposing her to £100M+ budgets and partner lists</div>
+                        <div class="bullet-point"><strong>Sensitivity Vectors:</strong> Visibility into transition docs (e.g., IRW succession criteria), geopolitical advocacy (e.g., Gaza/Syria protocols), and personal Tufail intel (e.g., travel for 40+ country ops)</div>
+                        <div class="bullet-point"><strong>Continuity Evidence:</strong> HUMINT overrides public gaps (e.g., no IR team page listing); her 2025 freelance activity shows no IR "exit" signals, suggesting compartmentalized loyalty</div>
+                    </div>
+                    
+                    <h3 class="section-subtitle">Freelance Ecosystem: Multi-Client Resilience</h3>
+                    
+                    <div class="content-text">
+                        <p><strong>Timeline Milestones:</strong></p>
+                        
+                        <div class="bullet-point"><strong>Pre-2023 (Foundation):</strong> Sparse 2021–2022 VA forum lurks; casual Bogotá group joins build local cred</div>
+                        <div class="bullet-point"><strong>2023 Pivot:</strong> April accountant post (Canadian firm, COP 4.8M salary) tests international waters; December IR share cements NGO niche</div>
+                        <div class="bullet-point"><strong>2024–2025 Expansion:</strong> September 2025 duo (NY CEO EA; Concentrix tech)—targeting bilingual entry-levels, hinting at talent pipelining for clients like Type B. August 2025 "Apoyo Asistentes Virtuales" welcome signals peer networking for skill-sharing (e.g., secure remote tools)</div>
+                    </div>
+                    
+                    <div class="info-box">
+                        <h3>Skills Inventory</h3>
+                        <p>Recruitment facilitation (CV routing), admin coordination, cross-cultural comms—tailored for IRW's diverse affiliates. Estimated workload: 60% IRW, 40% freelance, enabling financial buffer (~CAD 50–70K equivalent annually).</p>
+                    </div>
+                    
+                    <h3 class="section-subtitle">Type B Digital Integration</h3>
+                    <div class="content-text">
+                        <p>Email domain use (aurora@typeb.digital) implies contractor status under Nabeel Syed (Waterloo engineer, ex-Konrad AVP). Supports Syed's AI/strategy projects (50+ delivered, $20M+ budgets); her posts mirror Type B's tech focus, suggesting overlap in handling global team logistics.</p>
+                    </div>
+                    
+                    <h3 class="section-subtitle">Trajectory Projections</h3>
+                    <div class="content-text">
+                        <p>If Tufail ascends IRW CEO, Aurora could evolve to global PA—amplifying access—or pivot to full-time consulting. Freelance model risks dilution but affords deniability.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Network Dynamics Section -->
+            <div id="network" class="report-section">
+                <div class="section">
+                    <div class="section-header">
+                        <div class="section-number">SECTION 03</div>
+                        <h2 class="section-title">Network Dynamics</h2>
+                    </div>
+                    
+                    <h3 class="section-subtitle">Webs of Influence and Exposure</h3>
+                    <div class="content-text">
+                        <p>Aurora's connections are lean and functional, centered on utility over depth—minimizing leak surfaces.</p>
+                    </div>
+                    
+                    <h3 class="section-subtitle">Direct Ties</h3>
+                    <div class="content-text">
+                        <div class="bullet-point"><strong>Tufail Hussain:</strong> Hierarchical core; her role as "gatekeeper" to his "innovation ethos" (e.g., 2024 ICVA emphasis) grants proxy influence on IRW narratives</div>
+                        <div class="bullet-point"><strong>Nabeel Syed:</strong> Professional conduit via Type B; Syed's distributed ops (Colombia office) enable seamless remote integration, but freelance ambiguity could blur boundaries</div>
+                    </div>
+                    
+                    <h3 class="section-subtitle">Indirect/Community Layers</h3>
+                    <div class="content-text">
+                        <div class="bullet-point"><strong>VA Ecosystem:</strong> 5+ Facebook groups form a Bogotá "hub"—e.g., "Asistentes Virtuales en Colombia" for tips on tools like encrypted Zoom, indirectly bolstering her IRW efficacy</div>
+                        <div class="bullet-point"><strong>NGO/Tech Overlaps:</strong> "Cooperación Colombia" exposes her to aid peers; no overt activism, but 2023 IR post suggests affinity for humanitarian recruitment</div>
+                        <div class="bullet-point"><strong>Absences:</strong> Zero LinkedIn/X presence limits traceability; pre-2023 casuals (e.g., 2016 memes) show no enduring ties</div>
+                    </div>
+                    
+                    <div class="info-box">
+                        <h3>Influence Mapping</h3>
+                        <p>Low centrality (hub-and-spoke: IRW/Type B as spokes); her posts amplify opportunities, subtly expanding her network without self-promotion.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Risk Assessment Section -->
+            <div id="risk" class="report-section">
+                <div class="section">
+                    <div class="section-header">
+                        <div class="section-number">SECTION 04</div>
+                        <h2 class="section-title">Risk Assessment</h2>
+                    </div>
+                    
+                    <h3 class="section-subtitle">Hypothetical Compromise Scenarios</h3>
+                    <div class="content-text">
+                        <p>This section expands the prior risk assessment with concise summaries for each scenario, derived from collated OSINT/HUMINT patterns (e.g., Aurora's freelance overlaps, pre-2023 empathy traces). Summaries focus on core mechanics and triggers for brevity. RAG ratings (Red: High; Amber: Medium; Green: Low) and refined probabilities are isolated in a dedicated table below for analytical separation, including velocity (impact speed) and mitigations for quick reference.</p>
+                    </div>
+                    
+                    <h3 class="section-subtitle">Scenario 1: Accidental Cyber Breach via Freelance Overlap</h3>
+                    <div class="info-box">
+                        <h3>Non-Malicious Insider Error</h3>
+                        <p><strong>Mechanism:</strong> Aurora inadvertently syncs Tufail's sensitive IRW transition emails (e.g., affiliate strategy drafts) to a shared Type B Digital tool like Slack, exposing mid-tier data such as donor lists during routine multi-client admin tasks.</p>
+                        <p><strong>Trigger:</strong> Unsegmented remote workflows in under-resourced NGO environments</p>
+                        <p><strong>Probability:</strong> High (82%)</p>
+                        <p><strong>Impact Velocity:</strong> Rapid (24–48hr operations halt potential)</p>
+                    </div>
+                    
+                    <h3 class="section-subtitle">Scenario 2: Personal Financial Coercion</h3>
+                    <div class="info-box">
+                        <h3>Self-Motivated Insider</h3>
+                        <p><strong>Mechanism:</strong> Economic pressures from Bogotá's gig volatility lead Aurora to sell low-value intel (e.g., anonymized partner lists) via dark web brokers on Telegram, starting small but potentially escalating to Tufail's schedules if debts compound, exploiting her access to budget previews.</p>
+                        <p><strong>Trigger:</strong> Financial stress from freelance income instability</p>
+                        <p><strong>Probability:</strong> Medium (58%)</p>
+                        <p><strong>Impact Velocity:</strong> Gradual (Months to erode organizational trust)</p>
+                    </div>
+                    
+                    <h3 class="section-subtitle">Scenario 3: Ideological Alignment with External Advocacy Groups</h3>
+                    <div class="info-box">
+                        <h3>Aligned Insider</h3>
+                        <p><strong>Mechanism:</strong> Drawing from her pre-2023 community empathy (e.g., 2016–2020 helpful shares), Aurora voluntarily leaks "cautious" IRW Gaza plans to Colombian BDS or diaspora contacts, timed to global flares, to push for bolder advocacy and amplify internal reformist debates against Tufail's inclusivity focus.</p>
+                        <p><strong>Trigger:</strong> Perceived organizational caution on sensitive geopolitical issues</p>
+                        <p><strong>Probability:</strong> High (72%)</p>
+                        <p><strong>Impact Velocity:</strong> Swift (Weeks to staff churn and donor concerns)</p>
+                    </div>
+                    
+                    <h3 class="section-subtitle">Scenario 4: Corporate Espionage via Tech Partnerships</h3>
+                    <div class="info-box">
+                        <h3>Intermediated Insider</h3>
+                        <p><strong>Mechanism:</strong> Type B Digital serves as a conduit for rival firms (e.g., UAE/Chinese consultancies) to siphon IRW's AI crisis-mapping prototypes through Aurora's file shares, undercutting Tufail's innovation pitch during his potential global transition via disguised tech collaboration requests.</p>
+                        <p><strong>Trigger:</strong> Competitive intelligence gathering through vendor relationships</p>
+                        <p><strong>Probability:</strong> High (77%)</p>
+                        <p><strong>Impact Velocity:</strong> Targeted (Quarters to intellectual property loss)</p>
+                    </div>
+                    
+                    <h3 class="section-subtitle">RAG Ratings and Probability Table</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th style="width: 20%;">Scenario</th>
+                                <th style="width: 12%;">Probability</th>
+                                <th style="width: 15%;">RAG Rating</th>
+                                <th style="width: 25%;">Key Justification</th>
+                                <th style="width: 28%;">Expanded Mitigations</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1. Accidental Cyber Breach</td>
+                                <td>High (82%)</td>
+                                <td style="background: #ffebee; color: #c62828; font-weight: 600;">RED<br>(Rapid: 24–48hr ops halt)</td>
+                                <td>Multi-client tools + NGO cyber gaps (1,636 weekly attacks)</td>
+                                <td>Quarterly MFA drills; IR-specific enclaves; auto-redact tools</td>
+                            </tr>
+                            <tr>
+                                <td>2. Personal Financial Coercion</td>
+                                <td>Medium (58%)</td>
+                                <td style="background: #fff3e0; color: #f57c00; font-weight: 600;">AMBER<br>(Gradual: Months to erode trust)</td>
+                                <td>Gig economy pressures; gradual leaks</td>
+                                <td>Wellness audits; crypto monitoring; U4-inspired ethics modules</td>
+                            </tr>
+                            <tr>
+                                <td>3. Ideological Alignment</td>
+                                <td>High (72%)</td>
+                                <td style="background: #ffebee; color: #c62828; font-weight: 600;">RED<br>(Swift: Weeks to staff churn)</td>
+                                <td>Empathetic traits + IR polarization (e.g., Gaza)</td>
+                                <td>Semantic social scans; "impartiality oaths"; CISA-aligned hotlines</td>
+                            </tr>
+                            <tr>
+                                <td>4. Corporate Espionage</td>
+                                <td>High (77%)</td>
+                                <td style="background: #fff3e0; color: #f57c00; font-weight: 600;">AMBER<br>(Targeted: Quarters to IP loss)</td>
+                                <td>Type B overlaps + tech surges</td>
+                                <td>Vendor NDAs; Zero Trust pilots; annual Syed/IR syncs</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <div class="info-box" style="margin-top: 30px;">
+                        <h3>Aggregate Risk Posture</h3>
+                        <p><strong>Overall Assessment:</strong> Red (High Velocity)—Freelance + transition amplify; prioritize vetting and monitoring. This structure allows modular review: Summaries for narrative context, table for quantitative triage.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Analytical Insights Section -->
+            <div id="insights" class="report-section">
+                <div class="section">
+                    <div class="section-header">
+                        <div class="section-number">SECTION 05</div>
+                        <h2 class="section-title">Analytical Insights and Recommended Next Steps</h2>
+                    </div>
+                    
+                    <h3 class="section-subtitle">Key Analytical Insights</h3>
+                    <div class="content-text">
+                        <p>Aurora Barrionuevo Blandón emerges as a low-profile, highly capable remote PA whose bilingual expertise and freelance adaptability make her an asset for Tufail Hussain's executive orbit amid IRW's transitional dynamics. However, her multi-client model (e.g., Type B Digital overlaps) and Bogotá-based discretion introduce elevated insider risks—particularly cyber and ideological vectors (RAG: Red)—exploitable during Tufail's potential global CEO ascent.</p>
+                        
+                        <p>Pre-2023 traces reveal a resilient, empathetic operator unlikely to act maliciously, but systemic NGO vulnerabilities (e.g., 2025 cyber surges) amplify inadvertent exposures. Overall: A trusted enabler with a "quiet leverage" profile, where her invisibility is both strength and vulnerability—net risk posture remains high (Red), demanding proactive safeguards to protect IRW's £100M+ operations and neutrality.</p>
+                    </div>
+                    
+                    <h3 class="section-subtitle">Recommended Next Steps for IRW</h3>
+                    <div class="content-text">
+                        <p>To operationalize this intel and mitigate risks while retaining Aurora's value, prioritize a phased, low-disruption approach:</p>
+                        
+                        <div class="info-box">
+                            <h3>1. Immediate Actions</h3>
+                            <p>Conduct a discreet access audit of Aurora's IR tools (e.g., MFA enforcement, log review for Type B crossovers) and initiate anonymous wellness check-ins to gauge financial/ideological stressors. Engage Tufail for HUMINT refresh on her performance.</p>
+                        </div>
+                        
+                        <div class="info-box">
+                            <h3>2. Short-Term Measures</h3>
+                            <p>Roll out tailored training (e.g., CISA-inspired ethics modules on leaks) and segmented VPNs for remotes. Pilot Zero Trust for tech shares, monitoring via behavioral analytics.</p>
+                        </div>
+                        
+                        <div class="info-box">
+                            <h3>3. Medium-Term Strategy</h3>
+                            <p>If Tufail's IRW role solidifies, formalize Aurora's contract with NDAs and quarterly social scans. Explore redundancy (e.g., Bogotá VA backups) while fostering loyalty through incentives like skill certifications.</p>
+                        </div>
+                        
+                        <p style="margin-top: 25px;">This framework balances containment with continuity—escalate to full vetting only if indicators (e.g., anomalous posts) surface. Contact IRW Security Lead for implementation tracking.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <div class="footer-note">
+                <p style="font-weight: 600; margin-bottom: 8px;">RESTRICTED // SENSITIVE INTEL</p>
+                <p>This document contains confidential intelligence assessments. Unauthorized disclosure prohibited.</p>
+                <p style="margin-top: 15px;">Document ID: AB-EXP-2025-1016 | Generated: October 16, 2025</p>
+            </div>
+        </div>
+        
+        <!-- Back to Top Button -->
+        <button class="back-to-top" id="backToTop" onclick="scrollToTop()" aria-label="Back to top">
+            ↑
+        </button>
+    </div>
+
+    <script>
+        // Password Protection
+        const correctPassword = "ACCESS2025";
+        
+        function checkPassword() {
+            const input = document.getElementById('passwordInput').value;
+            const errorMsg = document.getElementById('errorMessage');
+            
+            if (input === correctPassword) {
+                document.getElementById('passwordPage').classList.remove('active');
+                document.getElementById('disclaimerPage').classList.add('active');
+                errorMsg.classList.remove('show');
+            } else {
+                errorMsg.classList.add('show');
+                document.getElementById('passwordInput').value = '';
+            }
+        }
+        
+        document.getElementById('passwordInput')?.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                checkPassword();
+            }
+        });
+        
+        // Disclaimer Page - Scroll Detection (Strict: Only at bottom)
+        let isAtBottom = false;
+        const acceptBtn = document.getElementById('acceptBtn');
+        const floatingAccept = document.getElementById('floatingAccept');
+        const scrollIndicator = document.getElementById('scrollIndicator');
+        
+        function checkScroll() {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            const windowHeight = window.innerHeight;
+            const documentHeight = document.documentElement.scrollHeight;
+            
+            // Check if at bottom (within 50px threshold)
+            if (scrollTop + windowHeight >= documentHeight - 50) {
+                if (!isAtBottom) {
+                    isAtBottom = true;
+                    floatingAccept.classList.add('visible');
+                    acceptBtn.classList.add('enabled');
+                    scrollIndicator.style.display = 'none';
+                }
+            } else {
+                // If scrolled back up, disable button
+                if (isAtBottom) {
+                    isAtBottom = false;
+                    acceptBtn.classList.remove('enabled');
+                    scrollIndicator.style.display = 'block';
+                }
+            }
+        }
+        
+        window.addEventListener('scroll', checkScroll);
+        
+        // Accept Terms
+        function acceptTerms() {
+            if (isAtBottom) {
+                document.getElementById('disclaimerPage').classList.remove('active');
+                document.getElementById('reportPage').classList.add('active');
+                window.scrollTo(0, 0);
+            }
+        }
+        
+        // Section Navigation
+        function showSection(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('.report-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Remove active from all buttons
+            document.querySelectorAll('.nav-menu button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Add active to clicked button
+            event.target.classList.add('active');
+            
+            // Scroll to top of content smoothly
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+        
+        // Back to Top Button
+        const backToTopBtn = document.getElementById('backToTop');
+        
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+        
+        // Show/hide back to top button based on scroll position
+        function handleBackToTopVisibility() {
+            if (window.pageYOffset > 300) {
+                backToTopBtn.classList.add('visible');
+            } else {
+                backToTopBtn.classList.remove('visible');
+            }
+        }
+        
+        window.addEventListener('scroll', handleBackToTopVisibility);
+        
+        // Add keyboard navigation for accessibility
+        document.addEventListener('keydown', function(e) {
+            // Escape key to close/go back
+            if (e.key === 'Escape') {
+                const currentPage = document.querySelector('.page.active');
+                if (currentPage.id === 'reportPage') {
+                    scrollToTop();
+                }
+            }
+        });
+    </script>
+</body>
+</html>
